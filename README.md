@@ -10,8 +10,8 @@ Requires Node.js 20.19+ (or 22.12+) and npm.
 ## Start
 
 ```sh
-git clone https://github.com/nicolasguelfi/calcapp-starter calcapp
-cd calcapp
+git clone https://github.com/nicolasguelfi/calcapp-starter ~/ai4se/calcapp
+cd ~/ai4se/calcapp
 git checkout -b mywork j2-start
 npm ci            # install the exact locked versions
 npm test          # tests in watch mode (q to quit) — or: npm run test:run
@@ -26,8 +26,8 @@ on `$PORT`, default 3000), `npm run preview`.
 Clone again in a **new folder** and start a branch at the tag of the current exercise:
 
 ```sh
-git clone https://github.com/nicolasguelfi/calcapp-starter calcapp-restart
-cd calcapp-restart
+git clone https://github.com/nicolasguelfi/calcapp-starter ~/ai4se/calcapp-restart
+cd ~/ai4se/calcapp-restart
 git checkout -b mywork j2-part1     # ← replace by the tag you need
 npm ci
 ```

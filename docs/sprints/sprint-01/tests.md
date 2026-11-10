@@ -65,8 +65,9 @@ gse:
 
 ### TST-007 — Ids do not collide (persisted-dataset uniqueness)
 - **Implements:** REQ-003, DEC-003 · **Component:** Identity (`id.ts`)
-- **Given** two calls in the same session (and a storage-seeded colliding id)
-- **When** ids are generated · **Then** the new ids differ from each other and from the stored one
+- **Given** a stored id, and 1,000 ids generated in one run
+- **When** ids are generated · **Then** all 1,000 are distinct from each other
+  and none equals the stored id (volume run — no collisions across a realistic dataset)
 - **Level:** unit
 
 ### TST-008 — Wrong-shape stored data yields an empty list
@@ -84,9 +85,11 @@ gse:
 
 ### TST-010 — Add flow keeps values and reports a save failure
 - **Implements:** REQ-001, DEC-002 · **Components:** Form + Add-flow + Persistence
-- **Setup:** storage stub whose `setItem` throws; render the add route in a memory router
+- **Setup:** storage stub whose `setItem` throws; a pre-existing in-memory list is on screen;
+  render the add route in a memory router
 - **Steps:** fill amount/category/date → submit
-- **Expected:** a save-failure message is shown; the typed values remain; the route does not change
+- **Expected:** a save-failure message is shown; the typed values remain; the route does not
+  change; the previously listed expenses are **not** lost from the in-memory list
 - **Level:** integration
 
 ### TST-011 — Dashboard shows a load-failure notice, not the empty state
@@ -133,6 +136,13 @@ gse:
 
 ## Performance Tests
 
+### TST-019 — An empty date is rejected
+- **Implements:** REQ-002 · **Component:** Validation (`expense.ts`)
+- **Given** `""` (empty date) · **When** validated
+- **Then** `{ ok: false, field: 'date', message }` (the empty case, alongside the
+  impossible-date case TST-005 and the non-ISO case TST-004)
+- **Level:** unit
+
 ### TST-018 — Dashboard renders 1,000 expenses under 200 ms
 - **Implements:** REQ-009 · **Components:** Dashboard + Persistence
 - **Setup:** seed 1,000 expenses (mixed months) into storage
@@ -145,7 +155,7 @@ gse:
 | REQ | TSTs |
 |---|---|
 | REQ-001 | TST-001, TST-002, TST-010, TST-011, TST-012 |
-| REQ-002 | TST-003, TST-004, TST-005 |
+| REQ-002 | TST-003, TST-004, TST-005, TST-019 |
 | REQ-003 | TST-006, TST-007 |
 | REQ-004 | TST-008, TST-009, TST-013 |
 | REQ-005 | TST-016 |

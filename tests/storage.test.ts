@@ -10,24 +10,49 @@ describe('saveExpenses and loadExpenses', () => {
   it('loads exactly what was saved', () => {
     saveExpenses(expenses)
 
-    expect(loadExpenses()).toEqual(expenses)
+    expect(loadExpenses()).toEqual({ ok: true, items: expenses })
   })
 
   it('loads an empty list after saving an empty list', () => {
     saveExpenses(expenses)
     saveExpenses([])
 
-    expect(loadExpenses()).toEqual([])
+    expect(loadExpenses()).toEqual({ ok: true, items: [] })
   })
 
   it('returns an empty list when nothing was ever saved', () => {
-    expect(loadExpenses()).toEqual([])
+    expect(loadExpenses()).toEqual({ ok: true, items: [] })
   })
 
+  // TST-001 — a write failure is RETURNED, not thrown (REQ-001, DEC-002)
+  it('reports a write failure instead of throwing', () => {
+    vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
+      throw new Error('QuotaExceededError')
+    })
+
+    const result = saveExpenses(expenses)
+
+    expect(result.ok).toBe(false)
+    if (!result.ok) expect(result.message).toMatch(/save/i)
+  })
+
+  // TST-002 — a read failure is distinguishable from an empty list (REQ-001, DEC-007)
+  it('reports a read failure instead of a success with an empty list', () => {
+    vi.spyOn(Storage.prototype, 'getItem').mockImplementation(() => {
+      throw new Error('SecurityError')
+    })
+
+    const result = loadExpenses()
+
+    expect(result.ok).toBe(false)
+    if (!result.ok) expect(result.reason).toBeTruthy()
+  })
+
+  // A parse error is damaged DATA, not a failed READ: it is still an empty list.
   it('returns an empty list when the stored JSON is corrupt', () => {
     localStorage.setItem(STORAGE_KEY, '{"amount": 42.5, "category":')
 
-    expect(loadExpenses()).toEqual([])
+    expect(loadExpenses()).toEqual({ ok: true, items: [] })
   })
 
   // Valid JSON is not necessarily a list of expenses: the dashboard spreads and
@@ -37,7 +62,7 @@ describe('saveExpenses and loadExpenses', () => {
     (raw) => {
       localStorage.setItem(STORAGE_KEY, raw)
 
-      expect(loadExpenses()).toEqual([])
+      expect(loadExpenses()).toEqual({ ok: true, items: [] })
     },
   )
 
@@ -55,9 +80,10 @@ describe('saveExpenses and loadExpenses', () => {
       ]),
     )
 
-    expect(loadExpenses()).toEqual([
-      { id: 'food', amount: 42.5, category: 'Food', date: '2026-11-10' },
-    ])
+    expect(loadExpenses()).toEqual({
+      ok: true,
+      items: [{ id: 'food', amount: 42.5, category: 'Food', date: '2026-11-10' }],
+    })
   })
 
   // saveExpenses accepts a bare draft (plan T3), so the read side accepts one too:
@@ -65,6 +91,9 @@ describe('saveExpenses and loadExpenses', () => {
   it('keeps a valid draft that carries no id', () => {
     saveExpenses([{ amount: 7.5, category: 'Transport', date: '2026-10-31' }])
 
-    expect(loadExpenses()).toEqual([{ amount: 7.5, category: 'Transport', date: '2026-10-31' }])
+    expect(loadExpenses()).toEqual({
+      ok: true,
+      items: [{ amount: 7.5, category: 'Transport', date: '2026-10-31' }],
+    })
   })
 })

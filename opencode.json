@@ -1,0 +1,21 @@
+{
+  "mcp": {
+    "servers": {
+      "context7": {
+        "type": "remote",
+        "url": "https://mcp.context7.com/mcp"
+      }
+    }
+  },
+  "$schema": "https://opencode.ai/config.json",
+  "permission": {
+    "skill": {
+      "*": "allow"
+    },
+    "question": "allow",
+    "bash": {
+      "git push --force *": "deny",
+      "rm -rf /*": "deny"
+    }
+  }
+}

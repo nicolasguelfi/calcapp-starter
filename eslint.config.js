@@ -6,7 +6,9 @@ import tseslint from 'typescript-eslint'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
-  globalIgnores(['dist']),
+  // `dist` is build output; `.opencode` is the installed GSE-One plugin
+  // directory (third-party tooling, not project code) — see REQ-005 / TASK-001.
+  globalIgnores(['dist', '.opencode']),
   {
     files: ['**/*.{ts,tsx}'],
     extends: [

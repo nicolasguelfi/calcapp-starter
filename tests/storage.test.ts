@@ -29,4 +29,35 @@ describe('saveExpenses and loadExpenses', () => {
 
     expect(loadExpenses()).toEqual([])
   })
+
+  // Valid JSON is not necessarily a list of expenses: the dashboard spreads and
+  // sorts what it gets, so a wrong shape must not leave this function.
+  it.each(['{}', '"hello"', 'null', '42', '{"expenses": []}'])(
+    'returns an empty list when the stored JSON is not a list (%s)',
+    (raw) => {
+      localStorage.setItem(STORAGE_KEY, raw)
+
+      expect(loadExpenses()).toEqual([])
+    },
+  )
+
+  it('drops stored entries that are not complete expenses', () => {
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify([
+        { id: 'food', amount: 42.5, category: 'Food', date: '2026-11-10' },
+        { id: 'no-amount', category: 'Food', date: '2026-11-10' },
+        { id: 'string-amount', amount: '42.5', category: 'Food', date: '2026-11-10' },
+        { id: 'zero-amount', amount: 0, category: 'Food', date: '2026-11-10' },
+        { id: 'no-id', amount: 7.5, category: 'Transport', date: '2026-10-31' },
+        { id: 'unknown-category', amount: 1, category: 'Rent', date: '2026-11-01' },
+        { id: 'blank-date', amount: 1, category: 'Food', date: ' ' },
+        null,
+      ]),
+    )
+
+    expect(loadExpenses()).toEqual([
+      { id: 'food', amount: 42.5, category: 'Food', date: '2026-11-10' },
+    ])
+  })
 })

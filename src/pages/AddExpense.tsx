@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import ExpenseForm from '../ExpenseForm'
 import { loadExpenses, saveExpenses } from '../storage'
+import { newId } from '../id'
 import type { ExpenseDraft } from '../expense'
 
 export default function AddExpense() {
@@ -21,7 +22,7 @@ export default function AddExpense() {
       return
     }
 
-    const expense = { ...draft, id: crypto.randomUUID() }
+    const expense = { ...draft, id: newId() }
     const result = saveExpenses([...existing.items, expense])
     if (!result.ok) {
       setSaveError(result.message)

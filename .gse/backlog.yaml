@@ -16,7 +16,7 @@ items:
       implements: [REQ-005]
       derives_from: [GAP-01]
     acceptance_criteria: "`npm run lint` exits 0 with the plugin directory ignored; project code lint rules unchanged; `npm run test:run` still passes."
-    status: review
+    status: fixing
     requires_review: false
     delivered_at: null
     completed_at: null
@@ -51,7 +51,7 @@ items:
       implements: [REQ-006]
       derives_from: [GAP-02]
     acceptance_criteria: "A recorded DEC chooses the trunk (merge mywork into main, or designate mywork as trunk). main contains the full CalcApp v0.1 with all 41 tests passing."
-    status: review
+    status: fixing
     requires_review: false
     delivered_at: null
     completed_at: null
@@ -86,10 +86,10 @@ items:
       implements: [REQ-002]
       derives_from: [GAP-03, RVW-3, RVW-4]
     acceptance_criteria: "A date with surrounding whitespace is stored trimmed; a non-ISO date is rejected with a message on the date field (or normalised); tests cover both."
-    status: review
+    status: reviewed
     requires_review: true
     delivered_at: null
-    completed_at: null
+    completed_at: "2026-11-10T21:05:00Z"
     origin: review
     origin_ref: "docs/review.md#RVW-3,#RVW-4"
     test_evidence:
@@ -121,7 +121,7 @@ items:
       implements: [REQ-001]
       derives_from: [GAP-03, RVW-5, RVW-201]
     acceptance_criteria: "A save failure surfaces a user-visible error instead of throwing and keeps the typed values; a load failure is distinguishable from an empty list and is never overwritten by a later save; tests simulate setItem/getItem throws and assert no crash and no data clobber."
-    status: review
+    status: fixing
     requires_review: true
     delivered_at: null
     completed_at: null
@@ -156,7 +156,7 @@ items:
       implements: [REQ-003]
       derives_from: [GAP-03, RVW-6]
     acceptance_criteria: "Expense ids are generated without requiring a secure context; a test stubs crypto.randomUUID as undefined and asserts the add flow still succeeds."
-    status: review
+    status: fixing
     requires_review: true
     delivered_at: null
     completed_at: null
@@ -191,7 +191,7 @@ items:
       implements: [REQ-004]
       derives_from: [GAP-03, RVW-7]
     acceptance_criteria: "tests/storage.test.ts includes cases for valid-JSON-wrong-shape values (object, string, number, list of bad rows) asserted to load as an empty/filtered list."
-    status: review
+    status: fixing
     requires_review: true
     delivered_at: null
     completed_at: null
@@ -254,7 +254,7 @@ items:
       implements: [REQ-008]
       derives_from: [GAP-06]
     acceptance_criteria: "A coverage run produces a baseline figure committed as evidence; the floor in config.yaml is confirmed or adjusted."
-    status: review
+    status: fixing
     requires_review: true
     delivered_at: null
     completed_at: null
@@ -289,7 +289,7 @@ items:
       implements: [REQ-009]
       derives_from: [REQ-009]
     acceptance_criteria: "With 1,000 seeded expenses, the dashboard renders the list and the month total within 200 ms, measured in an automated test."
-    status: review
+    status: fixing
     requires_review: true
     delivered_at: null
     completed_at: null

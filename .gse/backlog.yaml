@@ -51,22 +51,29 @@ items:
       implements: [REQ-006]
       derives_from: [GAP-02]
     acceptance_criteria: "A recorded DEC chooses the trunk (merge mywork into main, or designate mywork as trunk). main contains the full CalcApp v0.1 with all 41 tests passing."
-    status: planned
+    status: review
     requires_review: false
     delivered_at: null
     completed_at: null
     origin: collect
     origin_ref: "mywork vs main"
+    test_evidence:
+      status: pass
+      campaign_ref: docs/sprints/sprint-01/test-reports/TCP-001-sprint-01-task-001.md
+      timestamp: "2026-11-10T19:36:54Z"
+      pass_rate: 100
+      code_coverage: null
+      summary: "main fast-forwarded to the reconciliation commit: full CalcApp v0.1 + TASK-001 lint fix; npm run lint OK; 42/42 tests pass (41 app + 1 policy TST-016)."
     git:
       branch: gse/sprint-01/chore/reconcile-trunk
-      branch_status: planned
+      branch_status: active
       worktree: null
       worktree_status: null
-      last_commit: null
+      last_commit: "2026-11-10T19:36:54Z"
       uncommitted_changes: 0
     github_issue: null
     created: "2026-11-10T18:14:08Z"
-    updated: "2026-11-10T18:16:00Z"
+    updated: "2026-11-10T19:36:54Z"
 
   - id: TASK-003
     title: "Harden expense date handling (RVW-3, RVW-4)"

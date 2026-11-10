@@ -21,8 +21,8 @@ tasks:
 
 budget:
   total: 10
-  consumed: 1
-  remaining: 9
+  consumed: 3
+  remaining: 7
 
 workflow:
   expected: [collect, assess, plan, reqs, design, preview, tests, produce, review, deliver]

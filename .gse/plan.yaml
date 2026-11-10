@@ -21,8 +21,8 @@ tasks:
 
 budget:
   total: 10
-  consumed: 3
-  remaining: 7
+  consumed: 10
+  remaining: 0
 
 workflow:
   expected: [collect, assess, plan, reqs, design, preview, tests, produce, review, deliver]
@@ -34,8 +34,9 @@ workflow:
     - { activity: design,  completed_at: "2026-11-10T18:39:17Z", notes: "Design approved: 7 components, DEC-001..007." }
     - { activity: preview, completed_at: "2026-11-10T18:42:15Z", notes: "Static wireframe preview; preview_variant=static." }
     - { activity: tests,   completed_at: "2026-11-10T19:25:41Z", notes: "Verification plan confirmed (18 TSTs across unit/integration/e2e/policy/performance); approved on resume." }
-  active: produce
-  pending: [review, deliver]
+    - { activity: produce, completed_at: "2026-11-10T21:00:00Z", notes: "TASK-003..006,010,011 produced TDD on task branches, each merged into gse/sprint-01/integration when green; 66/66 tests, lint clean, coverage 100% lines." }
+  active: review
+  pending: [deliver]
   skipped: []
 
 coherence:

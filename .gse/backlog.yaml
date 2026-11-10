@@ -86,15 +86,22 @@ items:
       implements: [REQ-002]
       derives_from: [GAP-03, RVW-3, RVW-4]
     acceptance_criteria: "A date with surrounding whitespace is stored trimmed; a non-ISO date is rejected with a message on the date field (or normalised); tests cover both."
-    status: planned
+    status: review
     requires_review: true
     delivered_at: null
     completed_at: null
     origin: review
     origin_ref: "docs/review.md#RVW-3,#RVW-4"
+    test_evidence:
+      status: pass
+      campaign_ref: docs/sprints/sprint-01/test-reports/coverage-baseline.md
+      timestamp: "2026-11-10T20:58:00Z"
+      pass_rate: 100
+      code_coverage: 100
+      summary: "66/66 tests pass; npm run lint OK; coverage 100% lines."
     git:
       branch: gse/sprint-01/feat/date-handling
-      branch_status: planned
+      branch_status: active
       worktree: null
       worktree_status: null
       last_commit: null
@@ -114,15 +121,22 @@ items:
       implements: [REQ-001]
       derives_from: [GAP-03, RVW-5, RVW-201]
     acceptance_criteria: "A save failure surfaces a user-visible error instead of throwing and keeps the typed values; a load failure is distinguishable from an empty list and is never overwritten by a later save; tests simulate setItem/getItem throws and assert no crash and no data clobber."
-    status: planned
+    status: review
     requires_review: true
     delivered_at: null
     completed_at: null
     origin: review
     origin_ref: "docs/review.md#RVW-5"
+    test_evidence:
+      status: pass
+      campaign_ref: docs/sprints/sprint-01/test-reports/coverage-baseline.md
+      timestamp: "2026-11-10T20:58:00Z"
+      pass_rate: 100
+      code_coverage: 100
+      summary: "66/66 tests pass; npm run lint OK; coverage 100% lines."
     git:
       branch: gse/sprint-01/feat/storage-guard
-      branch_status: planned
+      branch_status: active
       worktree: null
       worktree_status: null
       last_commit: null
@@ -142,15 +156,22 @@ items:
       implements: [REQ-003]
       derives_from: [GAP-03, RVW-6]
     acceptance_criteria: "Expense ids are generated without requiring a secure context; a test stubs crypto.randomUUID as undefined and asserts the add flow still succeeds."
-    status: planned
+    status: review
     requires_review: true
     delivered_at: null
     completed_at: null
     origin: review
     origin_ref: "docs/review.md#RVW-6"
+    test_evidence:
+      status: pass
+      campaign_ref: docs/sprints/sprint-01/test-reports/coverage-baseline.md
+      timestamp: "2026-11-10T20:58:00Z"
+      pass_rate: 100
+      code_coverage: 100
+      summary: "66/66 tests pass; npm run lint OK; coverage 100% lines."
     git:
       branch: gse/sprint-01/feat/id-generator
-      branch_status: planned
+      branch_status: active
       worktree: null
       worktree_status: null
       last_commit: null
@@ -170,15 +191,22 @@ items:
       implements: [REQ-004]
       derives_from: [GAP-03, RVW-7]
     acceptance_criteria: "tests/storage.test.ts includes cases for valid-JSON-wrong-shape values (object, string, number, list of bad rows) asserted to load as an empty/filtered list."
-    status: planned
+    status: review
     requires_review: true
     delivered_at: null
     completed_at: null
     origin: review
     origin_ref: "docs/review.md#RVW-7"
+    test_evidence:
+      status: pass
+      campaign_ref: docs/sprints/sprint-01/test-reports/coverage-baseline.md
+      timestamp: "2026-11-10T20:58:00Z"
+      pass_rate: 100
+      code_coverage: 100
+      summary: "66/66 tests pass; npm run lint OK; coverage 100% lines."
     git:
       branch: gse/sprint-01/test/storage-shapes
-      branch_status: planned
+      branch_status: active
       worktree: null
       worktree_status: null
       last_commit: null
@@ -226,15 +254,22 @@ items:
       implements: [REQ-008]
       derives_from: [GAP-06]
     acceptance_criteria: "A coverage run produces a baseline figure committed as evidence; the floor in config.yaml is confirmed or adjusted."
-    status: planned
+    status: review
     requires_review: true
     delivered_at: null
     completed_at: null
     origin: collect
     origin_ref: "config.yaml testing.coverage.minimum"
+    test_evidence:
+      status: pass
+      campaign_ref: docs/sprints/sprint-01/test-reports/coverage-baseline.md
+      timestamp: "2026-11-10T20:58:00Z"
+      pass_rate: 100
+      code_coverage: 100
+      summary: "66/66 tests pass; npm run lint OK; coverage 100% lines."
     git:
       branch: gse/sprint-01/test/coverage-baseline
-      branch_status: planned
+      branch_status: active
       worktree: null
       worktree_status: null
       last_commit: null
@@ -254,15 +289,22 @@ items:
       implements: [REQ-009]
       derives_from: [REQ-009]
     acceptance_criteria: "With 1,000 seeded expenses, the dashboard renders the list and the month total within 200 ms, measured in an automated test."
-    status: planned
+    status: review
     requires_review: true
     delivered_at: null
     completed_at: null
     origin: user
     origin_ref: "REQ-009"
+    test_evidence:
+      status: pass
+      campaign_ref: docs/sprints/sprint-01/test-reports/coverage-baseline.md
+      timestamp: "2026-11-10T20:58:00Z"
+      pass_rate: 100
+      code_coverage: 100
+      summary: "66/66 tests pass; npm run lint OK; coverage 100% lines."
     git:
       branch: gse/sprint-01/test/dashboard-performance
-      branch_status: planned
+      branch_status: active
       worktree: null
       worktree_status: null
       last_commit: null

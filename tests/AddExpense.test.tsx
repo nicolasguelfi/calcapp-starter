@@ -23,6 +23,10 @@ function submitValidExpense() {
 }
 
 describe('add expense flow', () => {
+  afterEach(() => {
+    vi.unstubAllGlobals()
+  })
+
   it('stores the submitted expense once and returns to the dashboard', () => {
     renderAddPage()
 
@@ -73,5 +77,23 @@ describe('add expense flow', () => {
     expect(setItem).not.toHaveBeenCalled()
     expect(screen.getByRole('alert')).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'Add Expense' })).toBeInTheDocument()
+  })
+
+  // TST-006 (integration) — the add flow still succeeds without a secure context (REQ-003)
+  it('saves an expense when crypto.randomUUID is unavailable', () => {
+    vi.stubGlobal('crypto', { getRandomValues: crypto.getRandomValues.bind(crypto) })
+
+    renderAddPage()
+
+    submitValidExpense()
+
+    expect(screen.getByRole('heading', { name: 'CalcApp' })).toBeInTheDocument()
+
+    const result = loadExpenses()
+    expect(result.ok).toBe(true)
+    if (result.ok) {
+      expect(result.items).toHaveLength(1)
+      expect(result.items[0].id).toBeTruthy()
+    }
   })
 })

@@ -55,10 +55,11 @@ describe('saveExpenses and loadExpenses', () => {
     expect(loadExpenses()).toEqual({ ok: true, items: [] })
   })
 
+  // TST-008 — valid JSON of the wrong SHAPE loads as an empty list (REQ-004, RVW-7).
   // Valid JSON is not necessarily a list of expenses: the dashboard spreads and
   // sorts what it gets, so a wrong shape must not leave this function.
-  it.each(['{}', '"hello"', 'null', '42', '{"expenses": []}'])(
-    'returns an empty list when the stored JSON is not a list (%s)',
+  it.each(['{}', '"hello"', 'null', '42', 'true', '{"expenses": []}', '[1, 2, 3]', '[{}]'])(
+    'returns an empty list when the stored JSON is not a list of expenses (%s)',
     (raw) => {
       localStorage.setItem(STORAGE_KEY, raw)
 
@@ -66,6 +67,7 @@ describe('saveExpenses and loadExpenses', () => {
     },
   )
 
+  // TST-009 — a mixed list keeps the valid rows and drops every broken one (REQ-004, RVW-7)
   it('drops stored entries it cannot render and keeps valid drafts', () => {
     localStorage.setItem(
       STORAGE_KEY,
@@ -75,8 +77,14 @@ describe('saveExpenses and loadExpenses', () => {
         { id: 'string-amount', amount: '42.5', category: 'Food', date: '2026-11-10' },
         { id: 'zero-amount', amount: 0, category: 'Food', date: '2026-11-10' },
         { id: 'unknown-category', amount: 1, category: 'Rent', date: '2026-11-01' },
+        { id: 'numeric-category', amount: 1, category: 7, date: '2026-11-01' },
         { id: 'blank-date', amount: 1, category: 'Food', date: ' ' },
+        { id: 'numeric-date', amount: 1, category: 'Food', date: 20261101 },
+        { id: '', amount: 1, category: 'Food', date: '2026-11-01' },
+        { id: 42, amount: 1, category: 'Food', date: '2026-11-01' },
         null,
+        42,
+        'food',
       ]),
     )
 

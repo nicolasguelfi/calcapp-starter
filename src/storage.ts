@@ -18,9 +18,11 @@ export type LoadResult = { ok: true; items: Expense[] } | { ok: false; reason: s
 // expense (REQ-001, DEC-002).
 export type SaveResult = { ok: true } | { ok: false; message: string }
 
-// Mirrors the rules validateExpense applies on the way in. The dashboard spreads,
-// sorts and formats whatever comes back, so a row it cannot handle is dropped
-// instead of being passed on to crash the render.
+// The shape rules the dashboard depends on: a positive amount, a known category
+// and a non-empty date. validateExpense additionally requires an ISO date on the
+// way in, but a stored date is only ever read back as a string here. The dashboard
+// spreads, sorts and formats whatever comes back, so a row it cannot handle is
+// dropped instead of being passed on to crash the render.
 function isStoredExpense(value: unknown): value is Expense {
   if (typeof value !== 'object' || value === null) return false
 

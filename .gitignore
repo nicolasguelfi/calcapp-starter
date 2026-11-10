@@ -19,3 +19,10 @@ npm-debug.log*
 .idea
 .DS_Store
 !.env.example
+# GSE-One worktrees
+.worktrees/
+# GSE-One local state
+.gse/checkpoints/
+.gse/decisions-auto.log
+# GSE-One generated dashboard (refreshed on demand by tools/dashboard.py — local view, not versioned)
+docs/dashboard.html

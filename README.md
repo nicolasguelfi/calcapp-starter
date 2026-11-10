@@ -55,3 +55,17 @@ It listens on `$PORT` (default **3000**) and has a health check on `GET /`
 
 See [AGENTS.md](AGENTS.md) (read by opencode): TDD, one branch per task, never commit
 to `main` directly, never commit secrets.
+
+## Quality kit (day 4)
+
+The tag `quality-kit` adds a continuous-integration workflow (`.github/workflows/ci.yml`: install,
+lint, tests with coverage, build — on every push) and the `npm run test:coverage` script.
+To bring it into your own CalcApp:
+
+```bash
+git fetch origin --tags
+git checkout quality-kit -- .github/workflows/ci.yml
+npm install -D @vitest/coverage-v8@4.0.18
+npm pkg set scripts.test:coverage="vitest run --coverage"
+git add .github package.json package-lock.json && git commit -m "ci: lint, tests with coverage, build"
+```

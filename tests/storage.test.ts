@@ -41,7 +41,7 @@ describe('saveExpenses and loadExpenses', () => {
     },
   )
 
-  it('drops stored entries that are not complete expenses', () => {
+  it('drops stored entries it cannot render and keeps valid drafts', () => {
     localStorage.setItem(
       STORAGE_KEY,
       JSON.stringify([
@@ -49,7 +49,6 @@ describe('saveExpenses and loadExpenses', () => {
         { id: 'no-amount', category: 'Food', date: '2026-11-10' },
         { id: 'string-amount', amount: '42.5', category: 'Food', date: '2026-11-10' },
         { id: 'zero-amount', amount: 0, category: 'Food', date: '2026-11-10' },
-        { id: 'no-id', amount: 7.5, category: 'Transport', date: '2026-10-31' },
         { id: 'unknown-category', amount: 1, category: 'Rent', date: '2026-11-01' },
         { id: 'blank-date', amount: 1, category: 'Food', date: ' ' },
         null,
@@ -59,5 +58,13 @@ describe('saveExpenses and loadExpenses', () => {
     expect(loadExpenses()).toEqual([
       { id: 'food', amount: 42.5, category: 'Food', date: '2026-11-10' },
     ])
+  })
+
+  // saveExpenses accepts a bare draft (plan T3), so the read side accepts one too:
+  // the guard mirrors the write contract, it does not tighten it.
+  it('keeps a valid draft that carries no id', () => {
+    saveExpenses([{ amount: 7.5, category: 'Transport', date: '2026-10-31' }])
+
+    expect(loadExpenses()).toEqual([{ amount: 7.5, category: 'Transport', date: '2026-10-31' }])
   })
 })

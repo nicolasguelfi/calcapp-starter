@@ -15,7 +15,10 @@ export default function Home() {
   const total = monthTotal(expenses, currentMonth())
   const newestFirst = [...expenses].sort((a, b) => b.date.localeCompare(a.date))
 
-  function handleDelete(id: string) {
+  function handleDelete(id: string | undefined) {
+    // A stored row without an id cannot be told apart from another one, so there
+    // is nothing safe to delete.
+    if (id === undefined) return
     if (!window.confirm('Delete this expense?')) return
 
     const remaining = expenses.filter((expense) => expense.id !== id)

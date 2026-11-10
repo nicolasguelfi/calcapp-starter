@@ -18,8 +18,10 @@ export type ValidationResult =
   | { ok: true; value: ExpenseDraft }
   | { ok: false; message: string }
 
-function isCategory(value: string): value is Category {
-  return (CATEGORIES as readonly string[]).includes(value)
+// Shared with src/storage.ts, so reading back what we stored applies the same
+// category rule as accepting it in the form.
+export function isCategory(value: unknown): value is Category {
+  return typeof value === 'string' && (CATEGORIES as readonly string[]).includes(value)
 }
 
 export function validateExpense(input: ExpenseInput): ValidationResult {

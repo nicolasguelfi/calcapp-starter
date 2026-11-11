@@ -6,7 +6,9 @@ import tseslint from 'typescript-eslint'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
-  globalIgnores(['dist']),
+  // Generated or tool-owned folders: build output, coverage report,
+  // and the files the GSE-One plugin installs into the project (day 3).
+  globalIgnores(['dist', 'coverage', '.opencode', '.gse', '.gse-sandbox']),
   {
     files: ['**/*.{ts,tsx}'],
     extends: [

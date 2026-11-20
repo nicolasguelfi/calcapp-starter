@@ -3,7 +3,7 @@
 # NOTE: value lines below carry no trailing '#' comment — tools/dashboard.py's
 # parse_yaml_simple() does not strip inline comments and would misparse them.
 
-gse_version: "0.90.0"
+gse_version: "0.90.1"
 current_sprint: 1
 current_phase: LC02
 

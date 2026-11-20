@@ -127,7 +127,7 @@ for REQ-009 using the freed point, so the sprint budget stays 10/10.
 - **Acceptance criteria:**
   - Given a push or pull request, when CI runs, then lint, tests and build execute,
     and a style error fails the run.
-  - Verification route: workflow file in the repo; remote `nicolasguelfi/ai4se-reference-calcapp`, `sync_mode: manual`.
+  - Verification route: workflow file in the repo; your own GitHub repository (remote `mine`), `sync_mode: manual`.
 
 ### REQ-008 — Test coverage is measured against a floor
 - **type:** non-functional · **category:** maintainability · **priority:** could · **source:** TASK-010

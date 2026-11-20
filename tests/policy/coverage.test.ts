@@ -12,10 +12,14 @@
 import { describe, it, expect } from 'vitest'
 import config from '../../vite.config'
 
+// `defineConfig` returns a union of coverage-provider shapes, so the thresholds
+// are read through a narrow structural type.
+type CoverageWithThresholds = { thresholds?: { lines?: number } }
+
 describe('TST-017 — the coverage floor is enforced', () => {
   it('configures a line-coverage threshold', () => {
-    const thresholds = config.test?.coverage?.thresholds
+    const coverage = config.test?.coverage as CoverageWithThresholds | undefined
 
-    expect(thresholds?.lines).toBeGreaterThan(0)
+    expect(coverage?.thresholds?.lines).toBeGreaterThan(0)
   })
 })

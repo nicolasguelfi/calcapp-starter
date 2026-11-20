@@ -70,7 +70,7 @@ git:
 # --- Section 10: GitHub ---
 github:
   enabled: true
-  repo: "nicolasguelfi/ai4se-reference-calcapp"
+  repo: ""
   sync_mode: manual
   auto_close_on_deliver: true
   upstream_repo: ""

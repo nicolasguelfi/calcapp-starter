@@ -42,7 +42,7 @@ built step by step by the learner. Keep changes small and explain them.
 6. Ask before deleting files, rewriting history, or changing the stack or the Dockerfile.
 
 <!-- GSE-ONE START -->
-<!-- gse-one-version: 0.90.0 -->
+<!-- gse-one-version: 0.90.1 -->
 # GSE-One Methodology (opencode edition)
 
 This section is managed by GSE-One. Edit `gse-one/src/` and regenerate — do not hand-edit between the START/END markers.

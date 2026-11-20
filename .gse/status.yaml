@@ -1,0 +1,98 @@
+# GSE-One Project Status
+# Auto-maintained by the GSE-One agent. Do not edit manually.
+# NOTE: value lines below carry no trailing '#' comment — tools/dashboard.py's
+# parse_yaml_simple() does not strip inline comments and would misparse them.
+
+gse_version: "0.90.0"
+current_sprint: 1
+current_phase: LC01
+
+# Session pause state (set by /gse:pause, cleared by /gse:resume)
+session_paused: false
+pause_checkpoint: ""
+
+health:
+  score: 0.0
+  dimensions:
+    requirements_coverage: 0
+    test_pass_rate: 0
+    design_debt: 0
+    review_findings: 0
+    complexity_budget: 0
+    traceability: 0
+    git_hygiene: 0
+    ai_integrity: 0
+  last_computed: ""
+
+# P16 pushback detection — writes go through tools/counters.py
+consecutive_acceptances: 0
+pushback_dismissed: 0
+
+# P16 root-cause discipline — writes go through tools/counters.py
+fix_attempts_on_current_symptom: 0
+
+# Deterministic integrity-counter ledger (P15/P16)
+counters_last_write: "2026-11-10T18:19:52Z"
+
+# P6 scope reconciliation
+activity_start_sha: ""
+
+# P14 coach agent — pedagogy-axis history
+learning_preambles: []
+
+# P14 coach agent — inferred-gap ledger
+detected_gaps: []
+
+# Coach agent — profile-calibration axis
+profile_drift_signals: {}
+
+# Coach agent — cross-sprint workflow-axes ledger
+# Recorded at /gse:go after recovery check (sprint 0, adopted project) — coach ran, all axes skip.
+workflow_observations:
+  - { axis: pedagogy, moment: "/gse:go after recovery check", observation: "skip — learning goal 'Testing & TDD' not exercised by LC01 activities; deferred to REQS/PRODUCE/TESTS", evidence: "coach rationale", severity: info, timestamp: "2026-11-10T18:11:38Z", sprint: 0, summarized: false }
+  - { axis: profile_calibration, moment: "/gse:go after recovery check", observation: "skip — no drift signals, empty profile_drift_signals", evidence: "coach rationale", severity: info, timestamp: "2026-11-10T18:11:38Z", sprint: 0, summarized: false }
+  - { axis: sprint_velocity, moment: "/gse:go after recovery check", observation: "skip — insufficient history (sprint 0)", evidence: "coach rationale", severity: info, timestamp: "2026-11-10T18:11:38Z", sprint: 0, summarized: false }
+  - { axis: workflow_health, moment: "/gse:go after recovery check", observation: "skip — no skips or non-standard sequences", evidence: "coach rationale", severity: info, timestamp: "2026-11-10T18:11:38Z", sprint: 0, summarized: false }
+  - { axis: quality_trends, moment: "/gse:go after recovery check", observation: "skip — no review archives yet", evidence: "coach rationale", severity: info, timestamp: "2026-11-10T18:11:38Z", sprint: 0, summarized: false }
+  - { axis: engagement_pattern, moment: "/gse:go after recovery check", observation: "skip — no Gate history (consecutive_acceptances=0)", evidence: "coach rationale", severity: info, timestamp: "2026-11-10T18:11:38Z", sprint: 0, summarized: false }
+  - { axis: process_deviation, moment: "/gse:go after recovery check", observation: "skip — no methodology-deviation DEC- entries", evidence: "coach rationale", severity: info, timestamp: "2026-11-10T18:11:38Z", sprint: 0, summarized: false }
+  - { axis: sustainability, moment: "/gse:go after recovery check", observation: "skip — no sprint cadence/point data yet", evidence: "coach rationale", severity: info, timestamp: "2026-11-10T18:11:38Z", sprint: 0, summarized: false }
+  - { axis: pedagogy, moment: "activity_closure:/gse:collect", observation: "skip — ASSESS does not exercise TDD; deferred to TESTS/PRODUCE", evidence: "coach rationale", severity: info, timestamp: "2026-11-10T18:14:08Z", sprint: 0, summarized: false }
+  - { axis: profile_calibration, moment: "activity_closure:/gse:collect", observation: "skip — insufficient signal, no drift observed", evidence: "coach rationale", severity: info, timestamp: "2026-11-10T18:14:08Z", sprint: 0, summarized: false }
+  - { axis: sprint_velocity, moment: "activity_closure:/gse:collect", observation: "skip — no historical data, sprint 0", evidence: "coach rationale", severity: info, timestamp: "2026-11-10T18:14:08Z", sprint: 0, summarized: false }
+  - { axis: workflow_health, moment: "activity_closure:/gse:collect", observation: "skip — COLLECT completed as expected, no pattern", evidence: "coach rationale", severity: info, timestamp: "2026-11-10T18:14:08Z", sprint: 0, summarized: false }
+  - { axis: quality_trends, moment: "activity_closure:/gse:collect", observation: "skip — no review/test-campaign evidence yet", evidence: "coach rationale", severity: info, timestamp: "2026-11-10T18:14:08Z", sprint: 0, summarized: false }
+  - { axis: engagement_pattern, moment: "activity_closure:/gse:collect", observation: "skip — no Gate history", evidence: "coach rationale", severity: info, timestamp: "2026-11-10T18:14:08Z", sprint: 0, summarized: false }
+  - { axis: process_deviation, moment: "activity_closure:/gse:collect", observation: "skip — no deviation recorded", evidence: "coach rationale", severity: info, timestamp: "2026-11-10T18:14:08Z", sprint: 0, summarized: false }
+  - { axis: sustainability, moment: "activity_closure:/gse:collect", observation: "skip — not a session boundary, no cadence signal", evidence: "coach rationale", severity: info, timestamp: "2026-11-10T18:14:08Z", sprint: 0, summarized: false }
+  - { axis: pedagogy, moment: "activity_closure:/gse:assess", observation: "skip — PLAN does not exercise TDD; preamble cap preserved for TESTS/PRODUCE", evidence: "coach rationale", severity: info, timestamp: "2026-11-10T18:15:54Z", sprint: 0, summarized: false }
+  - { axis: profile_calibration, moment: "activity_closure:/gse:assess", observation: "skip — no drift signal", evidence: "coach rationale", severity: info, timestamp: "2026-11-10T18:15:54Z", sprint: 0, summarized: false }
+  - { axis: sprint_velocity, moment: "activity_closure:/gse:assess", observation: "skip — no prior sprints", evidence: "coach rationale", severity: info, timestamp: "2026-11-10T18:15:54Z", sprint: 0, summarized: false }
+  - { axis: workflow_health, moment: "activity_closure:/gse:assess", observation: "skip — no plan.yaml workflow yet", evidence: "coach rationale", severity: info, timestamp: "2026-11-10T18:15:54Z", sprint: 0, summarized: false }
+  - { axis: quality_trends, moment: "activity_closure:/gse:assess", observation: "skip — pre-adoption review is a source finding, not a GSE archive", evidence: "coach rationale", severity: info, timestamp: "2026-11-10T18:15:54Z", sprint: 0, summarized: false }
+  - { axis: engagement_pattern, moment: "activity_closure:/gse:assess", observation: "skip — no Gate sequence data", evidence: "coach rationale", severity: info, timestamp: "2026-11-10T18:15:54Z", sprint: 0, summarized: false }
+  - { axis: process_deviation, moment: "activity_closure:/gse:assess", observation: "skip — hygiene findings are one-off ASSESS outputs, not recurring deviation", evidence: "coach rationale", severity: info, timestamp: "2026-11-10T18:15:54Z", sprint: 0, summarized: false }
+  - { axis: sustainability, moment: "activity_closure:/gse:assess", observation: "skip — no cadence/point data", evidence: "coach rationale", severity: info, timestamp: "2026-11-10T18:15:54Z", sprint: 0, summarized: false }
+  - { axis: profile_calibration, moment: "activity_closure:/gse:plan", observation: "skip — no drift signal on first planning session", evidence: "coach rationale", severity: info, timestamp: "2026-11-10T18:19:52Z", sprint: 1, summarized: false }
+  - { axis: sprint_velocity, moment: "activity_closure:/gse:plan", observation: "skip — no velocity history (sprint 1)", evidence: "coach rationale", severity: info, timestamp: "2026-11-10T18:19:52Z", sprint: 1, summarized: false }
+  - { axis: workflow_health, moment: "activity_closure:/gse:plan", observation: "skip — workflow.skipped empty, no bypasses", evidence: "coach rationale", severity: info, timestamp: "2026-11-10T18:19:52Z", sprint: 1, summarized: false }
+  - { axis: quality_trends, moment: "activity_closure:/gse:plan", observation: "skip — review findings are adoption baseline, not sprint archives", evidence: "coach rationale", severity: info, timestamp: "2026-11-10T18:19:52Z", sprint: 1, summarized: false }
+  - { axis: engagement_pattern, moment: "activity_closure:/gse:plan", observation: "skip — consecutive_acceptances=0, no dismissals", evidence: "coach rationale", severity: info, timestamp: "2026-11-10T18:19:52Z", sprint: 1, summarized: false }
+  - { axis: process_deviation, moment: "activity_closure:/gse:plan", observation: "skip — no methodology-deviation DEC- entries", evidence: "coach rationale", severity: info, timestamp: "2026-11-10T18:19:52Z", sprint: 1, summarized: false }
+  - { axis: sustainability, moment: "activity_closure:/gse:plan", observation: "skip — no session-cadence history; 9/10 pts within guidance", evidence: "coach rationale", severity: info, timestamp: "2026-11-10T18:19:52Z", sprint: 1, summarized: false }
+
+last_activity: "/gse:plan"
+last_activity_timestamp: "2026-11-10T18:19:52Z"
+
+# Per-activity completion history (scoped to the current sprint) — reset at sprint promotion
+activity_history: []
+
+# Stale sprint detection
+sessions_without_progress: 0
+task_status_snapshot: {}
+
+# Review findings counter (used by hooks)
+review_findings_open: 0
+
+# /gse:audit history
+audit_history: []

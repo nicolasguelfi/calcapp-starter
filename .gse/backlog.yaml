@@ -1,0 +1,289 @@
+# GSE-One Unified Backlog
+# Single source of truth for all work items (TASK).
+# Items are either in the pool (sprint: null) or assigned to a sprint.
+
+items:
+  # --- Sprint 1 (selected by /gse:plan --strategic) ---
+
+  - id: TASK-001
+    title: "Exclude the installed GSE plugin directory from the style checker"
+    description: "npm run lint fails with 7 no-explicit-any errors, all originating in .opencode/plugins/gse-guardrails.ts (the installed GSE-ONE plugin), not in project code. eslint.config.js only ignores dist/."
+    artefact_type: config
+    sprint: 1
+    priority: must
+    complexity: 1
+    traces:
+      implements: []
+      derives_from: [GAP-01]
+    acceptance_criteria: "`npm run lint` exits 0 with the plugin directory ignored; project code lint rules unchanged; `npm run test:run` still passes."
+    status: planned
+    requires_review: false
+    delivered_at: null
+    completed_at: null
+    origin: collect
+    origin_ref: ".opencode/plugins/gse-guardrails.ts"
+    git:
+      branch: gse/sprint-01/chore/lint-ignore-plugin
+      branch_status: planned
+      worktree: null
+      worktree_status: null
+      last_commit: null
+      uncommitted_changes: 0
+    github_issue: null
+    created: "2026-11-10T18:14:08Z"
+    updated: "2026-11-10T18:16:00Z"
+
+  - id: TASK-002
+    title: "Reconcile the trunk: bring main up to date with the CalcApp work on mywork"
+    description: "main (8744f3d) is 24 commits behind mywork (4659ae4). The whole CalcApp v0.1 lives on mywork; main holds only the starter + CI kit. A trunk policy decision is required before the first GSE merge."
+    artefact_type: config
+    sprint: 1
+    priority: must
+    complexity: 2
+    traces:
+      implements: []
+      derives_from: [GAP-02]
+    acceptance_criteria: "A recorded DEC chooses the trunk (merge mywork into main, or designate mywork as trunk). main contains the full CalcApp v0.1 with all 41 tests passing."
+    status: planned
+    requires_review: false
+    delivered_at: null
+    completed_at: null
+    origin: collect
+    origin_ref: "mywork vs main"
+    git:
+      branch: gse/sprint-01/chore/reconcile-trunk
+      branch_status: planned
+      worktree: null
+      worktree_status: null
+      last_commit: null
+      uncommitted_changes: 0
+    github_issue: null
+    created: "2026-11-10T18:14:08Z"
+    updated: "2026-11-10T18:16:00Z"
+
+  - id: TASK-003
+    title: "Harden expense date handling (RVW-3, RVW-4)"
+    description: "validateExpense checks the date trimmed but stores it untrimmed (RVW-3), and only checks emptiness so a non-ISO date reaches storage and is silently dropped from the monthly total (RVW-4)."
+    artefact_type: code
+    sprint: 1
+    priority: should
+    complexity: 1
+    traces:
+      implements: []
+      derives_from: [GAP-03, RVW-3, RVW-4]
+    acceptance_criteria: "A date with surrounding whitespace is stored trimmed; a non-ISO date is rejected with a message on the date field (or normalised); tests cover both."
+    status: planned
+    requires_review: true
+    delivered_at: null
+    completed_at: null
+    origin: review
+    origin_ref: "docs/review.md#RVW-3,#RVW-4"
+    git:
+      branch: gse/sprint-01/feat/date-handling
+      branch_status: planned
+      worktree: null
+      worktree_status: null
+      last_commit: null
+      uncommitted_changes: 0
+    github_issue: null
+    created: "2026-11-10T18:14:08Z"
+    updated: "2026-11-10T18:16:00Z"
+
+  - id: TASK-004
+    title: "Guard browser storage access so the add flow cannot lose an expense (RVW-5)"
+    description: "Neither getItem nor setItem is guarded; a storage error throws before navigate('/') and the expense is lost."
+    artefact_type: code
+    sprint: 1
+    priority: must
+    complexity: 2
+    traces:
+      implements: []
+      derives_from: [GAP-03, RVW-5]
+    acceptance_criteria: "A save failure surfaces a user-visible error instead of throwing; tests simulate setItem/getItem throws and assert no crash."
+    status: planned
+    requires_review: true
+    delivered_at: null
+    completed_at: null
+    origin: review
+    origin_ref: "docs/review.md#RVW-5"
+    git:
+      branch: gse/sprint-01/feat/storage-guard
+      branch_status: planned
+      worktree: null
+      worktree_status: null
+      last_commit: null
+      uncommitted_changes: 0
+    github_issue: null
+    created: "2026-11-10T18:14:08Z"
+    updated: "2026-11-10T18:16:00Z"
+
+  - id: TASK-005
+    title: "Replace the secure-context id generator (RVW-6)"
+    description: "crypto.randomUUID() needs a secure context; over plain HTTP (vite preview --host 0.0.0.0) or older Safari it is undefined and submit throws."
+    artefact_type: code
+    sprint: 1
+    priority: should
+    complexity: 1
+    traces:
+      implements: []
+      derives_from: [GAP-03, RVW-6]
+    acceptance_criteria: "Expense ids are generated without requiring a secure context; a test stubs crypto.randomUUID as undefined and asserts the add flow still succeeds."
+    status: planned
+    requires_review: true
+    delivered_at: null
+    completed_at: null
+    origin: review
+    origin_ref: "docs/review.md#RVW-6"
+    git:
+      branch: gse/sprint-01/feat/id-generator
+      branch_status: planned
+      worktree: null
+      worktree_status: null
+      last_commit: null
+      uncommitted_changes: 0
+    github_issue: null
+    created: "2026-11-10T18:14:08Z"
+    updated: "2026-11-10T18:16:00Z"
+
+  - id: TASK-006
+    title: "Cover wrong-shape stored data in the storage tests (RVW-7)"
+    description: "Every storage test uses id-less drafts and treats 'corrupt JSON' as only a parse error, so the wrong-shape path fixed under RVW-1 is untested."
+    artefact_type: test
+    sprint: 1
+    priority: must
+    complexity: 1
+    traces:
+      implements: []
+      derives_from: [GAP-03, RVW-7]
+    acceptance_criteria: "tests/storage.test.ts includes cases for valid-JSON-wrong-shape values (object, string, number, list of bad rows) asserted to load as an empty/filtered list."
+    status: planned
+    requires_review: true
+    delivered_at: null
+    completed_at: null
+    origin: review
+    origin_ref: "docs/review.md#RVW-7"
+    git:
+      branch: gse/sprint-01/test/storage-shapes
+      branch_status: planned
+      worktree: null
+      worktree_status: null
+      last_commit: null
+      uncommitted_changes: 0
+    github_issue: null
+    created: "2026-11-10T18:14:08Z"
+    updated: "2026-11-10T18:16:00Z"
+
+  - id: TASK-009
+    title: "Add the CI workflow to the working copy"
+    description: "A CI workflow (lint, tests with coverage, build) exists on main but not on mywork; once the trunk is reconciled the working copy should carry CI."
+    artefact_type: config
+    sprint: null
+    priority: should
+    complexity: 1
+    traces:
+      implements: []
+      derives_from: [GAP-05]
+    acceptance_criteria: "A workflow file runs lint, tests and build on push/PR; it fails on lint errors (depends on TASK-001)."
+    status: open
+    requires_review: false
+    delivered_at: null
+    completed_at: null
+    origin: collect
+    origin_ref: "main CI kit"
+    git:
+      branch: null
+      branch_status: null
+      worktree: null
+      worktree_status: null
+      last_commit: null
+      uncommitted_changes: 0
+    github_issue: null
+    created: "2026-11-10T18:14:08Z"
+    updated: "2026-11-10T18:19:52Z"
+
+  - id: TASK-010
+    title: "Measure test coverage and set a floor"
+    description: "config.yaml sets a 60% minimum coverage but no coverage run has ever been executed; the current figure is unknown."
+    artefact_type: test
+    sprint: 1
+    priority: could
+    complexity: 1
+    traces:
+      implements: []
+      derives_from: [GAP-06]
+    acceptance_criteria: "A coverage run produces a baseline figure committed as evidence; the floor in config.yaml is confirmed or adjusted."
+    status: planned
+    requires_review: true
+    delivered_at: null
+    completed_at: null
+    origin: collect
+    origin_ref: "config.yaml testing.coverage.minimum"
+    git:
+      branch: gse/sprint-01/test/coverage-baseline
+      branch_status: planned
+      worktree: null
+      worktree_status: null
+      last_commit: null
+      uncommitted_changes: 0
+    github_issue: null
+    created: "2026-11-10T18:14:08Z"
+    updated: "2026-11-10T18:16:00Z"
+
+
+  # --- Pool (deferred to a later sprint) ---
+
+  - id: TASK-007
+    title: "Tighten weak or redundant tests (RVW-8, RVW-9, RVW-10, RVW-12)"
+    description: "RVW-8 tautological whitespace assertion; RVW-9 renders the real browser router instead of the memory-router helper; RVW-10 asserts heading+storage but not the dashboard list; RVW-12 redeclares StoredExpense instead of importing Expense."
+    artefact_type: test
+    sprint: null
+    priority: could
+    complexity: 1
+    traces:
+      implements: []
+      derives_from: [GAP-04, RVW-8, RVW-9, RVW-10, RVW-12]
+    acceptance_criteria: "Each of RVW-8/9/10/12 is addressed without weakening any existing assertion; the suite remains green."
+    status: open
+    requires_review: true
+    delivered_at: null
+    completed_at: null
+    origin: review
+    origin_ref: "docs/review.md#RVW-8,#RVW-9,#RVW-10,#RVW-12"
+    git:
+      branch: null
+      branch_status: null
+      worktree: null
+      worktree_status: null
+      last_commit: null
+      uncommitted_changes: 0
+    github_issue: null
+    created: "2026-11-10T18:14:08Z"
+    updated: "2026-11-10T18:16:00Z"
+
+  - id: TASK-008
+    title: "Add an error screen for unknown paths and render errors (RVW-11)"
+    description: "No errorElement is configured, so unknown paths and render errors show the default error screen or a blank page."
+    artefact_type: code
+    sprint: null
+    priority: could
+    complexity: 1
+    traces:
+      implements: []
+      derives_from: [GAP-04, RVW-11]
+    acceptance_criteria: "An errorElement renders a readable message for an unknown route; a test asserts the not-found screen instead of a blank page."
+    status: open
+    requires_review: true
+    delivered_at: null
+    completed_at: null
+    origin: review
+    origin_ref: "docs/review.md#RVW-11"
+    git:
+      branch: null
+      branch_status: null
+      worktree: null
+      worktree_status: null
+      last_commit: null
+      uncommitted_changes: 0
+    github_issue: null
+    created: "2026-11-10T18:14:08Z"
+    updated: "2026-11-10T18:16:00Z"

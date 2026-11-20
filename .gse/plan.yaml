@@ -1,0 +1,51 @@
+# GSE-One Sprint Plan
+# Created by /gse:plan --strategic. Maintained by orchestrator throughout sprint.
+# Target: .gse/plan.yaml
+
+version: 1
+id: "PLN-001"
+sprint: 1
+mode: full
+status: active
+goal: "Establish a trustworthy baseline — unblock the toolchain, reconcile the trunk, close the medium-priority review findings, and add CI."
+
+tasks:
+  - { id: TASK-001, order: 1, complexity: 1, branch: gse/sprint-01/chore/lint-ignore-plugin }
+  - { id: TASK-002, order: 2, complexity: 2, branch: gse/sprint-01/chore/reconcile-trunk }
+  - { id: TASK-003, order: 3, complexity: 1, branch: gse/sprint-01/feat/date-handling }
+  - { id: TASK-004, order: 4, complexity: 2, branch: gse/sprint-01/feat/storage-guard }
+  - { id: TASK-005, order: 5, complexity: 1, branch: gse/sprint-01/feat/id-generator }
+  - { id: TASK-006, order: 6, complexity: 1, branch: gse/sprint-01/test/storage-shapes }
+  - { id: TASK-010, order: 7, complexity: 1, branch: gse/sprint-01/test/coverage-baseline }
+
+budget:
+  total: 10
+  consumed: 0
+  remaining: 10
+
+workflow:
+  expected: [collect, assess, plan, reqs, design, preview, tests, produce, review, deliver]
+  completed:
+    - { activity: collect, completed_at: "2026-11-10T18:14:08Z", notes: "Internal inventory of adopted CalcApp." }
+    - { activity: assess,  completed_at: "2026-11-10T18:15:54Z", notes: "Gap analysis; seeded TASK-001..010." }
+    - { activity: plan,    completed_at: "2026-11-10T18:19:52Z", notes: "Sprint 1 planned and approved — 7 tasks, 9/10 pts." }
+  active: reqs
+  pending: [design, preview, tests, produce, review, deliver]
+  skipped: []
+
+coherence:
+  last_evaluated: "2026-11-10T18:19:52Z"
+  scope_changes:
+    - { timestamp: "2026-11-10T18:19:52Z", trigger: user-request, description: "TASK-009 (CI) returned to pool at plan approval — the course supplies a CI quality kit on day 4", budget_impact: "-1 pt" }
+  alerts: []
+
+risks:
+  - description: "The trunk is behind the working copy (main is 24 commits behind mywork); creating the sprint integration branch from main would start from the skeleton, not the app."
+    likelihood: high
+    mitigation: "TASK-002 (order 2) must run before any merge/integration branch is created; PRODUCE starts feature branches from the current working copy until the trunk decision is recorded."
+  - description: "TASK-001 (lint) gates TASK-009 (CI fails on lint); committing is blocked by the project rule 'lint must pass' until TASK-001 lands."
+    likelihood: medium
+    mitigation: "Keep TASK-001 as order 1."
+
+created: "2026-11-10T18:19:52Z"
+updated: "2026-11-10T18:19:52Z"

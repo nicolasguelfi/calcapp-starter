@@ -21,8 +21,8 @@ tasks:
 
 budget:
   total: 10
-  consumed: 0
-  remaining: 10
+  consumed: 3
+  remaining: 7
 
 workflow:
   expected: [collect, assess, plan, reqs, design, preview, tests, produce, review, deliver]
@@ -43,10 +43,10 @@ coherence:
 risks:
   - description: "The trunk is behind the working copy (main is 24 commits behind mywork); creating the sprint integration branch from main would start from the skeleton, not the app."
     likelihood: high
-    mitigation: "TASK-002 (order 2) must run before any merge/integration branch is created; PRODUCE starts feature branches from the current working copy until the trunk decision is recorded."
+    mitigation: "Resolved: the recovery snapshot puts CalcApp on main (TASK-002 done)."
   - description: "TASK-001 (lint) gates TASK-009 (CI fails on lint); committing is blocked by the project rule 'lint must pass' until TASK-001 lands."
     likelihood: medium
-    mitigation: "Keep TASK-001 as order 1."
+    mitigation: "Resolved: the v0.90.1 adapter is lint-exempt (TASK-001 done)."
 
 created: "2026-11-10T18:19:52Z"
-updated: "2026-11-10T18:45:46Z"
+updated: "2026-11-21T12:00:00Z"

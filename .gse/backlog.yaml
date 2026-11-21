@@ -7,7 +7,7 @@ items:
 
   - id: TASK-001
     title: "Exclude the installed GSE plugin directory from the style checker"
-    description: "npm run lint fails with 7 no-explicit-any errors, all originating in .opencode/plugins/gse-guardrails.ts (the installed GSE-ONE plugin), not in project code. eslint.config.js only ignores dist/."
+    description: "npm run lint fails with 7 no-explicit-any errors, all originating in .opencode/plugins/gse-guardrails.ts (the installed GSE-ONE plugin), not in project code. eslint.config.js only ignores dist/. Already resolved in this recovery snapshot: GSE-One v0.90.1 marks its installed adapter lint-exempt, so npm run lint passes without a project change."
     artefact_type: config
     sprint: 1
     priority: must
@@ -16,26 +16,33 @@ items:
       implements: [REQ-005]
       derives_from: [GAP-01]
     acceptance_criteria: "`npm run lint` exits 0 with the plugin directory ignored; project code lint rules unchanged; `npm run test:run` still passes."
-    status: planned
+    status: done
     requires_review: false
     delivered_at: null
-    completed_at: null
+    completed_at: "2026-11-21T12:00:00Z"
     origin: collect
     origin_ref: ".opencode/plugins/gse-guardrails.ts"
+    test_evidence:
+      status: pass
+      campaign_ref: null
+      timestamp: "2026-11-21T12:00:00Z"
+      pass_rate: 100
+      code_coverage: null
+      summary: "Checked on this recovery snapshot: npm run lint exits 0; npm run test:run 41/41 on main."
     git:
-      branch: gse/sprint-01/chore/lint-ignore-plugin
-      branch_status: planned
+      branch: null
+      branch_status: null
       worktree: null
       worktree_status: null
       last_commit: null
       uncommitted_changes: 0
     github_issue: null
     created: "2026-11-10T18:14:08Z"
-    updated: "2026-11-10T18:16:00Z"
+    updated: "2026-11-21T12:00:00Z"
 
   - id: TASK-002
     title: "Reconcile the trunk: bring main up to date with the CalcApp work on mywork"
-    description: "main (8744f3d) is 24 commits behind mywork (4659ae4). The whole CalcApp v0.1 lives on mywork; main holds only the starter + CI kit. A trunk policy decision is required before the first GSE merge."
+    description: "main (8744f3d) is 24 commits behind mywork (4659ae4). The whole CalcApp v0.1 lives on mywork; main holds only the starter + CI kit. A trunk policy decision is required before the first GSE merge. Already resolved in this recovery snapshot: the restart puts the whole CalcApp on main (git switch -C main <tag>), as DEC-001 decided."
     artefact_type: config
     sprint: 1
     priority: must
@@ -44,22 +51,29 @@ items:
       implements: [REQ-006]
       derives_from: [GAP-02]
     acceptance_criteria: "A recorded DEC chooses the trunk (merge mywork into main, or designate mywork as trunk). main contains the full CalcApp v0.1 with all 41 tests passing."
-    status: planned
+    status: done
     requires_review: false
     delivered_at: null
-    completed_at: null
+    completed_at: "2026-11-21T12:00:00Z"
     origin: collect
     origin_ref: "mywork vs main"
+    test_evidence:
+      status: pass
+      campaign_ref: null
+      timestamp: "2026-11-21T12:00:00Z"
+      pass_rate: 100
+      code_coverage: null
+      summary: "Checked on this recovery snapshot: npm run lint exits 0; npm run test:run 41/41 on main."
     git:
-      branch: gse/sprint-01/chore/reconcile-trunk
-      branch_status: planned
+      branch: null
+      branch_status: null
       worktree: null
       worktree_status: null
       last_commit: null
       uncommitted_changes: 0
     github_issue: null
     created: "2026-11-10T18:14:08Z"
-    updated: "2026-11-10T18:16:00Z"
+    updated: "2026-11-21T12:00:00Z"
 
   - id: TASK-003
     title: "Harden expense date handling (RVW-3, RVW-4)"

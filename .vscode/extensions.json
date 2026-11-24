@@ -1,0 +1,15 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "vitest.explorer",
+    "mhutchie.git-graph",
+    "redhat.vscode-yaml",
+    "usernamehw.errorlens"
+  ],
+  "unwantedRecommendations": [
+    "github.copilot",
+    "github.copilot-chat",
+    "eamodio.gitlens",
+    "esbenp.prettier-vscode"
+  ]
+}

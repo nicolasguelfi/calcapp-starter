@@ -8,11 +8,11 @@ description field in v0.1; delete asks for confirmation (`window.confirm` stubbe
 `vi.spyOn`); "this month" is the current calendar month, the list shows all expenses
 newest-first; no styling this version.
 
-## T1 — Expense model and validation        [next]
+## T1 — Expense model and validation        [done]
 Accept: a test accepts {42.5, 'Food', '2026-11-10'} and rejects amount 0, -1, 'abc', an empty category and an empty date, returning a message for the first offending field
 Branch: feat/expense-model
 
-## T2 — Money helpers        [todo]
+## T2 — Money helpers        [next]
 Accept: monthTotal(expenses, '2026-11') sums only that month's expenses, and formatAmount(42.5) is '42.50 €' (plain toFixed, no Intl locale or narrow no-break spaces)
 Branch: feat/money-helpers
 

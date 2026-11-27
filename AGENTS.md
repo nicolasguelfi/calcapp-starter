@@ -33,10 +33,19 @@ built step by step by the learner. Keep changes small and explain them.
 
 1. **TDD**: write or update a failing test first, then the code that makes it pass,
    then refactor. Never delete or weaken a test to make it pass.
-2. Before proposing a commit: `npm run test:run` and `npm run lint` must pass.
-3. **One branch per task** (`feat/<short-name>`, `fix/<short-name>`).
-   **Never commit directly to `main`**; `main` only receives merges of finished tasks.
-4. Small commits with clear messages; show `git status` / `git diff` before committing.
+2. Before proposing a commit: `npm run test:run` and `npm run lint` must pass — except the
+   RED commit (`test: …`), which records the new failing test on the task branch, never on
+   the main line.
+3. **Main line** = `mywork` on day 2 (until v0.1), `main` from day 3. **One branch per task**,
+   created from the main line and named on the task's `Branch:` line (`feat/…`, `fix/…`).
+   **Never commit a task directly on the main line**: it only receives the plan
+   (`docs: v0.1 plan`), the plan labels (`docs: update plan labels`) and merges of finished,
+   green tasks (`git switch <main line> && git merge <branch>`).
+4. **Commits per task, on its branch**: `test: …` (red), then `feat: …` or `fix: …` (green),
+   then `refactor: …` only if something improved. Messages use the Conventional Commits types
+   `feat`, `fix`, `test`, `refactor`, `docs`, `chore`. Show `git status` / `git diff` before
+   committing; after agent work, stage files by name. Before any `git switch`, commit or
+   `git stash`: uncommitted changes follow you onto the other branch.
 5. **Never commit secrets**: no keys, passwords or tokens in code, tests or docs;
    `.env*` files stay out of git (already in `.gitignore`).
 6. Ask before deleting files, rewriting history, or changing the stack or the Dockerfile.
